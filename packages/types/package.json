@@ -1,0 +1,26 @@
+{
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "12.0.10",
+    "tslint": "5.18.0",
+    "typescript": "3.5.2"
+  },
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
+  "license": "UNLICENSED",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "module": "./src/index.ts",
+  "name": "@package/types",
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint --project tsconfig.json --fix",
+    "test": "exit 0",
+    "prepublish": "npm run build"
+  },
+  "sideEffects": false,
+  "title": "-=WOW=-",
+  "version": "0.0.1"
+}

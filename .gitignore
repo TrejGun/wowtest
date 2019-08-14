@@ -1,0 +1,23 @@
+# Project
+dist/
+logs/
+
+
+# IDE
+.idea
+.vscode
+
+# OS
+.DS_Store
+
+# NODE
+node_modules/
+lerna-debug.log
+npm-debug.log
+package-lock.json
+
+# env
+.env.development
+.env.test
+.env.production
+.env.staging

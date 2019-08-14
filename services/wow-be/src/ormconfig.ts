@@ -11,7 +11,7 @@ const config: ConnectionOptions = {
   synchronize: false,
   // Run migrations automatically,
   // you can disable this if you prefer running migration manually.
-  migrationsRun: process.env.NODE_ENV !== "production",
+  migrationsRun: process.env.NODE_ENV === "development",
   logging: true,
   // logger: 'file',
   // Allow both start:prod and start:dev to use migrations

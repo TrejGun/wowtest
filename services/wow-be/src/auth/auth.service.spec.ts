@@ -1,11 +1,13 @@
 import {Test, TestingModule} from "@nestjs/testing";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {PassportModule} from "@nestjs/passport";
+import {JwtModule} from "@nestjs/jwt";
 import {AuthService} from "./auth.service";
 import {LocalStrategy} from "./local.strategy";
 import {JwtStrategy} from "./jwt.strategy";
 import {UsersModule} from "../users/users.module";
-import {PassportModule} from "@nestjs/passport";
-import {JwtModule} from "@nestjs/jwt";
 import {jwtConstants} from "./constants";
+import * as ormconfig from "../ormconfig";
 
 describe("AuthService", () => {
   let service: AuthService;
@@ -13,6 +15,7 @@ describe("AuthService", () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
+        TypeOrmModule.forRoot(ormconfig),
         UsersModule,
         PassportModule,
         JwtModule.register({

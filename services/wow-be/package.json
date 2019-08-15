@@ -54,7 +54,7 @@
     "start": "NODE_ENV=development tsc-watch --onSuccess \"node .\" --onFailure \"echo Compilation Failed\"",
     "start:debug": "NODE_ENV=development tsc-watch --onSuccess \"node --inspect=0.0.0.0:$DEBUG_PORT .\" --onFailure \"echo Compilation Failed\"",
     "start:prod": "NODE_ENV=production node .",
-    "test": "jest",
+    "test": "jest --config jest.config.json",
     "typeorm": "NODE_ENV=development ts-node ./node_modules/.bin/typeorm --config src/ormconfig.ts"
   },
   "title": "WOW BE Service",

@@ -30,6 +30,8 @@ export class AvatarsService {
   }
 
   private async uploadImage(file: File) {
+    // TODO use image_upload  service
+    // https://github.com/shamnadps/Image_upload_typescript/blob/master/src/image_upload/image_upload.service.ts
     try {
       const client = new AWS.S3();
       const name = `avatars/${Date.now()}.${file.mimetype.split("/")[1]}`;

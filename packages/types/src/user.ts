@@ -1,17 +1,18 @@
 export enum UserStatus {
   Active = "active",
   Inactive = "inactive",
+  Pending = "pending",
 }
 
 export enum UserRole {
-  Guest = "influencer",
-  Admin = "marketer",
-  System = "watcher",
+  Influencer = "influencer",
+  Marketer = "marketer",
+  Watcher = "watcher",
 }
 
 export enum UserGender {
-  Male = "Male",
-  Female = "Female",
+  Male = "male",
+  Female = "female",
 }
 
 export interface User {

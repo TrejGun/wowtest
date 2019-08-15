@@ -11,7 +11,7 @@ export class AddUserTable1562222612033 implements MigrationInterface {
   }
 
   public async up(queryRunner: QueryRunner): Promise<any> {
-    await queryRunner.query(`CREATE TYPE wow.user_status_enum AS ENUM ('active', 'inactive');`);
+    await queryRunner.query(`CREATE TYPE wow.user_status_enum AS ENUM ('active', 'inactive', 'pending');`);
     await queryRunner.query(`CREATE TYPE wow.user_role_enum AS ENUM ('influencer', 'marketer', 'watcher');`);
     await queryRunner.query(`CREATE TYPE wow.user_gender_enum AS ENUM ('male', 'female');`);
 
@@ -45,20 +45,24 @@ export class AddUserTable1562222612033 implements MigrationInterface {
         {
           name: "birthday",
           type: "date",
+          isNullable: true,
         },
         {
           name: "gender",
           type: "wow.user_gender_enum",
+          isNullable: true,
         },
 
         // marketer specific fields
         {
           name: "description",
           type: "varchar",
+          isNullable: true,
         },
         {
           name: "phone",
           type: "varchar",
+          isNullable: true,
         },
 
         // system fields

@@ -1,8 +1,9 @@
+import {createHash} from "crypto";
+import {Repository} from "typeorm";
 import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {User, UserStatus} from "@package/types";
 import {UsersEntity} from "./users.entity";
-import {createHash} from "crypto";
 
 @Injectable()
 export class UsersService {
@@ -26,6 +27,12 @@ export class UsersService {
         password: this.createPasswordHash(password, email),
       },
     });
+  }
+
+  public create(data: User) {
+    data.status = UserStatus.Pending;
+    data.password = this.createPasswordHash(data.password, data.email);
+    return this.usersRepository.create(data).save();
   }
 
   private createPasswordHash(password: string, salt: string) {

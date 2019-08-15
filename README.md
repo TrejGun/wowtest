@@ -15,7 +15,7 @@ In order to run test you must create `wow-test` database manually
 There is installation script which will install all dependencies, populate .env files and run build command for you
 
 ```bash
-sh scripts/install.sh
+bash scripts/install.sh
 ```
 
 Then you can run project
@@ -23,3 +23,7 @@ Then you can run project
 ```bash
 npm start
 ```
+
+## Configuration
+
+For fine tune check services READMEs

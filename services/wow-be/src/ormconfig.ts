@@ -1,4 +1,5 @@
 import "./env";
+import {SnakeNamingStrategy} from "typeorm-naming-strategies";
 import {ConnectionOptions} from "typeorm";
 
 // Check typeORM documentation for more information.
@@ -12,6 +13,7 @@ const config: ConnectionOptions = {
   // Run migrations automatically,
   // you can disable this if you prefer running migration manually.
   migrationsRun: process.env.NODE_ENV === "development",
+  namingStrategy: new SnakeNamingStrategy(),
   logging: true,
   // logger: 'file',
   // Allow both start:prod and start:dev to use migrations

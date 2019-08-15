@@ -11,7 +11,7 @@ export class AddUserTable1562222612033 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.query(`CREATE TYPE wow.user_status_enum AS ENUM ('active', 'inactive');`);
-    await queryRunner.query(`CREATE TYPE wow.user_role_enum AS ENUM ('guest', 'admin', 'system');`);
+    await queryRunner.query(`CREATE TYPE wow.user_role_enum AS ENUM ('influencer', 'marketer', 'watcher');`);
 
     const table = new Table({
       name: this.tableName,
@@ -22,19 +22,11 @@ export class AddUserTable1562222612033 implements MigrationInterface {
           isPrimary: true,
         },
         {
-          name: "first_name",
-          type: "varchar",
-        },
-        {
-          name: "last_name",
-          type: "varchar",
-        },
-        {
           name: "email",
           type: "varchar",
         },
         {
-          name: "phone",
+          name: "password",
           type: "varchar",
         },
         {
@@ -46,11 +38,11 @@ export class AddUserTable1562222612033 implements MigrationInterface {
           type: "wow.user_role_enum",
         },
         {
-          name: "time_created_at",
+          name: "created_at",
           type: "timestamptz",
         },
         {
-          name: "time_updated_at",
+          name: "updated_at",
           type: "timestamptz",
         },
       ],

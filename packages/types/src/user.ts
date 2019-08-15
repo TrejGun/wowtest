@@ -4,19 +4,17 @@ export enum UserStatus {
 }
 
 export enum UserRole {
-  Guest = "guest",
-  Admin = "admin",
-  System = "system",
+  Guest = "influencer",
+  Admin = "marketer",
+  System = "watcher",
 }
 
 export interface User {
   id: number;
   email: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
+  password: string;
   role: UserRole;
   status: UserStatus;
-  timeCreatedAt: string;
-  timeUpdatedAt: string;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -2,8 +2,8 @@ import {BaseEntity, BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGenerated
 import {UserRole, UserStatus, User as UserType} from "@package/types";
 import {date} from "@package/date";
 
-@Entity({schema: "wow"})
-export class User extends BaseEntity implements UserType {
+@Entity({schema: "wow", name: "user"})
+export class UsersEntity extends BaseEntity implements UserType {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -12,15 +12,6 @@ export class User extends BaseEntity implements UserType {
 
   @Column({type: "varchar", select: false})
   public password: string;
-
-  @Column({type: "varchar"})
-  public firstName: string;
-
-  @Column({type: "varchar"})
-  public lastName: string;
-
-  @Column({type: "varchar"})
-  public phone: string;
 
   @Column({
     type: "enum",
@@ -35,19 +26,19 @@ export class User extends BaseEntity implements UserType {
   public status: UserStatus;
 
   @Column({type: "timestamptz"})
-  public timeCreatedAt: string;
+  public createdAt: string;
 
   @Column({type: "timestamptz"})
-  public timeUpdatedAt: string;
+  public updatedAt: string;
 
   @BeforeInsert()
   public beforeInsert() {
-    this.timeCreatedAt = date.toISOString();
-    this.timeUpdatedAt = date.toISOString();
+    this.createdAt = date.toISOString();
+    this.updatedAt = date.toISOString();
   }
 
   @BeforeUpdate()
   public beforeUpdate() {
-    this.timeUpdatedAt = date.toISOString();
+    this.updatedAt = date.toISOString();
   }
 }

@@ -1,0 +1,60 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "array-type": [true, "generic"],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "arrow-return-shorthand": [true, "multiline"],
+    "ban-types": false,
+    "class-name": true,
+    "curly": true,
+    "indent": [true, "spaces"],
+    "interface-name": false,
+    "linebreak-style": [true, "LF"],
+    "max-classes-per-file": [true, 1],
+    "member-ordering": [
+      true,
+      {
+        "alphabetize": false,
+        "order": [
+          "public-static-field",
+          "public-instance-field",
+          "public-constructor",
+          "private-static-field",
+          "private-instance-field",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "no-console": [true, "log"],
+    "no-duplicate-variable": true,
+    "no-eval": true,
+    "no-namespace": false,
+    "no-return-await": true,
+    "no-string-throw": true,
+    "no-trailing-whitespace": true,
+    "no-var-keyword": true,
+    "object-literal-sort-keys": false,
+    "one-line": false,
+    "ordered-imports": false,
+    "prefer-const": true,
+    "prefer-object-spread": true,
+    "prefer-template": true,
+    "quotemark": [true, "double"],
+    "semicolon": [true, "always"],
+    "strict-comparisons": true,
+    "switch-default": true,
+    "trailing-comma": [
+      true,
+      {
+        "esSpecCompliant": true,
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ],
+    "triple-equals": [true, "allow-null-check", "allow-undefined-check"],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"]
+  }
+}

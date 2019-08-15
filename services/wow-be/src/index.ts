@@ -1,5 +1,5 @@
 import {NestFactory} from "@nestjs/core";
-import {ApplicationModule} from "./app.module";
+import {AppModule} from "./app.module";
 import {SwaggerModule, DocumentBuilder} from "@nestjs/swagger";
 
 declare global {
@@ -12,7 +12,7 @@ declare global {
 }
 
 async function bootstrap() {
-  const app = await NestFactory.create(ApplicationModule);
+  const app = await NestFactory.create(AppModule);
 
   const options = new DocumentBuilder()
     .setTitle("WOW test")

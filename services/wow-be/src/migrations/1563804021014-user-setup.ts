@@ -7,10 +7,17 @@ export class UserSetup1563804021014 implements MigrationInterface {
 
     await queryRunner.query("TRUNCATE TABLE wow.user RESTART IDENTITY CASCADE;");
 
-    await queryRunner.query(`INSERT INTO wow.user
-      (email, status, role, created_at, updated_at, "password")
-      VALUES
-      ('trejgun@gmail.com', 'active', 'marketer', '${currentDateTime}', '${currentDateTime}', '${passwordHash}');`);
+    await queryRunner.query(`INSERT INTO wow.user (
+       email, password, first_name, last_name,
+       birthday, gender,
+       description, phone,
+       status, role, created_at, updated_at
+       ) VALUES (
+       'trejgun@gmail.com', '${passwordHash}', 'Trej', 'Gun',
+       '1985-12-06', 'male',
+       'cool guy', '15129554129',
+       'active', 'marketer', '${currentDateTime}', '${currentDateTime}'
+       );`);
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {

@@ -1,5 +1,5 @@
 import {BaseEntity, BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
-import {UserRole, UserStatus, User as UserType} from "@package/types";
+import {UserRole, UserStatus, UserGender, User as UserType} from "@package/types";
 import {date} from "@package/date";
 
 @Entity({schema: "wow", name: "user"})
@@ -12,6 +12,27 @@ export class UsersEntity extends BaseEntity implements UserType {
 
   @Column({type: "varchar", select: false})
   public password: string;
+
+  @Column({type: "varchar"})
+  public firstName: string;
+
+  @Column({type: "varchar"})
+  public lastName: string;
+
+  @Column({type: "date"})
+  public birthday: string;
+
+  @Column({type: "date"})
+  public description: string;
+
+  @Column({type: "date"})
+  public phone: string;
+
+  @Column({
+    type: "enum",
+    enum: UserGender,
+  })
+  public gender: UserGender;
 
   @Column({
     type: "enum",

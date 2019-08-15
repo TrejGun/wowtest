@@ -9,10 +9,21 @@ export enum UserRole {
   System = "watcher",
 }
 
+export enum UserGender {
+  Male = "Male",
+  Female = "Female",
+}
+
 export interface User {
   id: number;
   email: string;
   password: string;
+  firstName: string;
+  lastName: string;
+  birthday: string;
+  phone: string;
+  description: string;
+  gender: UserGender;
   role: UserRole;
   status: UserStatus;
   createdAt: string;

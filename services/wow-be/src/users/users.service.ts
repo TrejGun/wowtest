@@ -19,11 +19,11 @@ export class UsersService {
     return this.usersRepository.findOne({id});
   }
 
-  public async getByCredentials(username: string, password: string) {
+  public async getByCredentials(email: string, password: string) {
     return this.usersRepository.findOne({
       where: {
-        email: username,
-        password: this.createPasswordHash(password, username),
+        email,
+        password: this.createPasswordHash(password, email),
       },
     });
   }

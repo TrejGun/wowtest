@@ -38,8 +38,8 @@ You can log in to the application using CURL
 
 ```bash
 curl \
--X POST http://localhost:3000/api/login \
--d '{"username": "trejgun@gmail.com", "password": "qwerty"}' 
+-X POST http://localhost:3000/login \
+-d '{"email": "trejgun@gmail.com", "password": "qwerty"}' \
 -H "Content-Type: application/json"
 ```
 
@@ -52,13 +52,13 @@ Put this token in header of your requests
 
 ```bash
 curl \
-http://localhost:3000/api/profile 
+http://localhost:3000/profile \
 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRyZWpndW5AZ21haWwuY29tIiwic3ViIjoxLCJpYXQiOjE1NjU4NTgwMDUsImV4cCI6MTU2NTg1ODA2NX0.jqfDhj-sSHtOiT41eD0vBuj64lgBg87oGIyJ78c5gus"
 ```
 
 This will return your info
 ```bash
-{"id":1,"username":"trejgun@gmail.com"}
+{"id":1,"email":"trejgun@gmail.com"}
 ```
 
 ## Image Upload

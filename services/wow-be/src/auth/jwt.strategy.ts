@@ -14,6 +14,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   public async validate(payload: any) {
-    return {id: payload.sub, username: payload.username};
+    // TODO this should call JWTService
+    // https://github.com/marcomelilli/nestjs-email-authentication/blob/master/src/auth/jwt.service.ts
+    return {id: payload.id, email: payload.email};
   }
 }

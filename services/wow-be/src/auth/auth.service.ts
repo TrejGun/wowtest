@@ -10,6 +10,10 @@ export class AuthService {
     return this.usersService.getByCredentials(email, password);
   }
 
+  public async getUser(id: number): Promise<any> {
+    return this.usersService.findById(id);
+  }
+
   public async login(user: any) {
     const payload = {email: user.email, id: user.id};
     return {

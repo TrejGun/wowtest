@@ -58,7 +58,7 @@ http://localhost:3000/profile \
 
 This will return your info
 ```bash
-{"id":1,"email":"trejgun@gmail.com"}
+{"id":1,"email":"trejgun@gmail.com","firstName":"Trej","lastName":"Gun","birthday":"1985-12-06","description":"cool guy","phone":"15129554129","parentId":null,"gender":"male","role":"marketer","status":"active","createdAt":"2019-08-16T10:08:48.680Z","updatedAt":"2019-08-16T10:08:48.680Z","avatar":null}
 ```
 
 ## Registration

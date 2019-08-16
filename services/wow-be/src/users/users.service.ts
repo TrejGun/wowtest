@@ -13,11 +13,11 @@ export class UsersService {
   ) {}
 
   public findAll(): Promise<Array<UsersEntity>> {
-    return this.usersRepository.find();
+    return this.usersRepository.find({relations: ["avatar"]});
   }
 
   public findById(id: number): Promise<UsersEntity | undefined> {
-    return this.usersRepository.findOne({id});
+    return this.usersRepository.findOne({id}, {relations: ["avatar"]});
   }
 
   public async getByCredentials(email: string, password: string) {

@@ -1,6 +1,16 @@
-import {BaseEntity, BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {
+  BaseEntity,
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
 import {User as UserType, UserGender, UserRole, UserStatus} from "@package/types";
 import {date} from "@package/date";
+import {AvatarsEntity} from "../avatars/avatars.entity";
 
 @Entity({schema: "wow", name: "user"})
 export class UsersEntity extends BaseEntity implements UserType {
@@ -48,6 +58,10 @@ export class UsersEntity extends BaseEntity implements UserType {
     enum: UserStatus,
   })
   public status: UserStatus;
+
+  @OneToOne(() => AvatarsEntity, avatar => avatar.userId)
+  @JoinColumn({name: "id"})
+  public avatar: AvatarsEntity;
 
   @Column({type: "timestamptz"})
   public createdAt: string;

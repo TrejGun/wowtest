@@ -29,12 +29,12 @@ npm run start:prod
 Swagger ui is available on
 
 ```
-http://localhost:3001/swagger
+http://localhost:3000/swagger
 ```
 
 ## Login 
 
-You can log in to the application using CURL
+You can log in to the application using default `marketer` user by executing this CURL request
 
 ```bash
 curl \
@@ -48,7 +48,7 @@ This will give you JWT token
 {"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRyZWpndW5AZ21haWwuY29tIiwic3ViIjoxLCJpYXQiOjE1NjU4NTgwMDUsImV4cCI6MTU2NTg1ODA2NX0.jqfDhj-sSHtOiT41eD0vBuj64lgBg87oGIyJ78c5gus"}
 ```
 
-Put this token in header of your requests
+Put this token in header of each of your subsequent requests
 
 ```bash
 curl \
@@ -59,6 +59,26 @@ http://localhost:3000/profile \
 This will return your info
 ```bash
 {"id":1,"email":"trejgun@gmail.com"}
+```
+
+## Registration
+
+To create new `influencer` or `marketer` use common registration endpoint
+```bash
+curl \
+-X POST http://localhost:3000/users \
+-d '{"email": "influencer@gmail.com", "password": "strongPassw0rd", "firstName": "Influencer", "lastName": "Wow", "role": "influencer", "birthday": "2000-05-05"}' \
+-H "Content-Type: application/json"
+```
+
+
+To create `watcher` you have to be logged in as marketer and use special registration endpoint
+```bash
+curl \
+-X POST http://localhost:3000/users/watcher \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRyZWpndW5AZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTU2NTk0MTkxNSwiZXhwIjoxNTY1OTQxOTc1fQ.R577RR9gZmjAmmCgKdDQN_gHJMInAW7SPJtTOH5HY_c" \
+-d '{"email": "watcher@gmail.com", "password": "strongPassw0rd", "firstName": "Watcher", "role": "watcher"}' \
+-H "Content-Type: application/json"
 ```
 
 ## Image Upload
@@ -81,3 +101,4 @@ curl \
 -F "avatar=@\"image.png\"" \
 -F "description=1234567890" 
 ```
+

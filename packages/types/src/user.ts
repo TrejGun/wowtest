@@ -24,6 +24,7 @@ export interface User {
   birthday: string;
   phone: string;
   description: string;
+  parentId: number | null;
   gender: UserGender;
   role: UserRole;
   status: UserStatus;

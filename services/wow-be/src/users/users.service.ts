@@ -29,13 +29,20 @@ export class UsersService {
     });
   }
 
-  public create(data: User) {
+  public async create(data: User, parentId: number | null): Promise<UsersEntity> {
     data.status = UserStatus.Pending;
+    data.parentId = parentId;
     data.password = this.createPasswordHash(data.password, data.email);
-    return this.usersRepository.create(data).save();
+    const user = await this.usersRepository.create(data).save();
+    delete user.password;
+    return user;
   }
 
-  private createPasswordHash(password: string, salt: string) {
+  public delete(id: number, parentId: number) {
+    return this.usersRepository.delete({id, parentId});
+  }
+
+  private createPasswordHash(password: string, salt: string): string {
     return createHash("sha256")
       .update(password)
       .update(salt)

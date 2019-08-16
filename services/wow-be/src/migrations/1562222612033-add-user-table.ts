@@ -35,10 +35,12 @@ export class AddUserTable1562222612033 implements MigrationInterface {
         {
           name: "first_name",
           type: "varchar",
+          isNullable: true,
         },
         {
           name: "last_name",
           type: "varchar",
+          isNullable: true,
         },
 
         // influencer specific fields
@@ -65,6 +67,13 @@ export class AddUserTable1562222612033 implements MigrationInterface {
           isNullable: true,
         },
 
+        // watcher specific fields
+        {
+          name: "parent_id",
+          type: "int",
+          isNullable: true,
+        },
+
         // system fields
         {
           name: "status",
@@ -81,6 +90,14 @@ export class AddUserTable1562222612033 implements MigrationInterface {
         {
           name: "updated_at",
           type: "timestamptz",
+        },
+      ],
+      foreignKeys: [
+        {
+          columnNames: ["parent_id"],
+          referencedColumnNames: ["id"],
+          referencedTableName: "wow.user",
+          onDelete: "CASCADE",
         },
       ],
     });

@@ -28,6 +28,9 @@ export class UsersEntity extends BaseEntity implements UserType {
   @Column({type: "date"})
   public phone: string;
 
+  @Column({type: "int"})
+  public parentId: number | null;
+
   @Column({
     type: "enum",
     enum: UserGender,

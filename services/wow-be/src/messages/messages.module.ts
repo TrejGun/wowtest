@@ -12,4 +12,4 @@ import {UsersService} from "../users/users.service";
   controllers: [MessagesController],
   exports: [MessagesService],
 })
-export class UsersModule {}
+export class MessageModule {}

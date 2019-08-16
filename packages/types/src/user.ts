@@ -1,3 +1,5 @@
+import {Avatar} from "../";
+
 export enum UserStatus {
   Active = "active",
   Inactive = "inactive",
@@ -28,6 +30,7 @@ export interface User {
   gender: UserGender;
   role: UserRole;
   status: UserStatus;
+  avatar: Avatar;
   createdAt: string;
   updatedAt: string;
 }

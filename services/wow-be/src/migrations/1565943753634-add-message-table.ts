@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
 export class AddUserTable1565943753634 implements MigrationInterface {
-  public tableName = "wow.avatar";
+  public tableName = "wow.message";
 
   public async down(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.dropTable(this.tableName);

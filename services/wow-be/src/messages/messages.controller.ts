@@ -1,4 +1,4 @@
-import {Controller, Get, UseGuards, Post, Param, Body, Request, Delete, Put} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Post, Put, Request, UseGuards} from "@nestjs/common";
 import {AuthGuard} from "@nestjs/passport";
 import {DeleteResult} from "typeorm";
 import {MessagesService} from "./messages.service";
@@ -37,17 +37,24 @@ export class MessagesController {
     return this.messagesService.deleteDialog(req.user.id, id);
   }
 
+  @Get("/:id")
+  @UseGuards(AuthGuard("jwt"))
+  @Roles(UserRole.Marketer, UserRole.Influencer)
+  public getMessage(@Request() req: any, @Param("id") id: number): Promise<MessagesEntity | undefined> {
+    return this.messagesService.findOne(1 || req.user.id, id);
+  }
+
   @Delete("/:id")
   @UseGuards(AuthGuard("jwt"))
   @Roles(UserRole.Marketer, UserRole.Influencer)
-  public delete(@Request() req: any, @Param("id") id: number): Promise<DeleteResult> {
+  public deleteMessage(@Request() req: any, @Param("id") id: number): Promise<DeleteResult> {
     return this.messagesService.delete(req.user.id, id);
   }
 
   @Put("/:id")
   @UseGuards(AuthGuard("jwt"))
   @Roles(UserRole.Marketer, UserRole.Influencer)
-  public edit(
+  public editMessage(
     @Request() req: any,
     @Param("id") id: number,
     @Body(new JoiValidationPipe(updateMessageSchema)) body: any,

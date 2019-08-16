@@ -4,13 +4,6 @@ import {UsersEntity} from "./users.entity";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import * as ormconfig from "../ormconfig";
 
-export const mockRepository = jest.fn(() => ({
-  metadata: {
-    columns: [],
-    relations: [],
-  },
-}));
-
 describe("UsersService", () => {
   let service: UsersService;
 

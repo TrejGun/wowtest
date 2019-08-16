@@ -7,7 +7,7 @@ export class AvatarsEntity extends BaseEntity implements AvatarType {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column({type: "varchar"})
+  @Column({type: "int"})
   public userId: number;
 
   @Column({type: "varchar"})

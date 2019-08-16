@@ -1,5 +1,5 @@
 import {BaseEntity, BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
-import {UserRole, UserStatus, UserGender, User as UserType} from "@package/types";
+import {User as UserType, UserGender, UserRole, UserStatus} from "@package/types";
 import {date} from "@package/date";
 
 @Entity({schema: "wow", name: "user"})

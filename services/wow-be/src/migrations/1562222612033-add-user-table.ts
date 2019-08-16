@@ -100,6 +100,12 @@ export class AddUserTable1562222612033 implements MigrationInterface {
           onDelete: "CASCADE",
         },
       ],
+      uniques: [
+        {
+          name: "user_email_index",
+          columnNames: ["email"],
+        },
+      ],
     });
 
     await queryRunner.createTable(table, true);

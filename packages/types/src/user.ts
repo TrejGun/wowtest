@@ -1,4 +1,4 @@
-import {Avatar} from "../";
+import {Avatar} from "./avatar";
 
 export enum UserStatus {
   Active = "active",

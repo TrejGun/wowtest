@@ -12,7 +12,7 @@ import {
 } from "@nestjs/common";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {AuthGuard} from "@nestjs/passport";
-import {User, UserRole} from "@package/types";
+import {UserRole} from "@package/types";
 import {DeleteResult} from "typeorm";
 import {UsersService} from "./users.service";
 import {AvatarsService} from "../avatars/avatars.service";
@@ -35,7 +35,7 @@ export class UsersController {
   }
 
   @Post("/")
-  public signup(@Body(new JoiValidationPipe(createUserSchema)) body: User): Promise<UsersEntity> {
+  public signup(@Body(new JoiValidationPipe(createUserSchema)) body: any): Promise<UsersEntity> {
     return this.usersService.create(body, null);
   }
 

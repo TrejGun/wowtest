@@ -1,42 +1,68 @@
-import * as PlainJoi from "@hapi/joi";
-// @ts-ignore
-import * as joiDate from "@hapi/joi-date";
-// @ts-ignore
-import * as joiZxcvbn from "joi-zxcvbn";
+import {ValidateIf} from "class-validator";
 import {UserGender, UserRole} from "@package/types";
+import {IsString, IsConfirm, IsPassword} from "../../validators";
+import {CreateUserFields} from "../users.types";
+import {reEmail} from "../../constants";
 
-// tslint:disable-next-line:variable-name
-const Joi = PlainJoi.extend(joiZxcvbn(PlainJoi)).extend(joiDate);
+export class CreateUserSchema implements CreateUserFields {
+  @IsString({
+    required: true,
+    regexp: reEmail,
+  })
+  public email: string;
 
-export const createUserSchema = Joi.object().keys({
-  email: Joi.string()
-    .email({minDomainSegments: 2})
-    .required(),
-  password: Joi.string()
-    .zxcvbn(1)
-    .required(),
-  firstName: Joi.string()
-    .min(2)
-    .regex(/^[a-z]+$/i, {name: "alpha"})
-    .required(),
-  lastName: Joi.string()
-    .min(2)
-    .regex(/^[a-z]+$/i, {name: "alpha"})
-    .required(),
-  role: Joi.valid([UserRole.Influencer, UserRole.Marketer]),
-  birthday: Joi.date()
-    .format("YYYY-MM-DD")
-    .when("role", {is: UserRole.Influencer, then: Joi.required()}),
-  gender: Joi.valid(Object.values(UserGender)).when("role", {
-    is: UserRole.Influencer,
-    then: Joi.optional(),
-    otherwise: Joi.forbidden(),
-  }),
-  description: Joi.string()
-    .min(100)
-    .when("role", {is: UserRole.Marketer, then: Joi.optional(), otherwise: Joi.forbidden()}),
-  phone: Joi.string()
-    .min(2)
-    .regex(/^[0-9]+$/i, {name: "numeric"})
-    .when("role", {is: UserRole.Marketer, then: Joi.optional(), otherwise: Joi.forbidden()}),
-});
+  @IsPassword()
+  public password: string;
+
+  @IsConfirm()
+  public confirm: string;
+
+  @IsString({
+    required: true,
+    regexp: /[A-Z][a-z]+/,
+    minLength: 2,
+  })
+  public firstName: string;
+
+  @IsString({
+    required: true,
+    regexp: /[A-Z][a-z]+/,
+    minLength: 2,
+  })
+  public lastName: string;
+
+  @IsString({
+    required: true,
+    type: {
+      [UserRole.Marketer]: UserRole.Marketer,
+      [UserRole.Influencer]: UserRole.Influencer,
+    },
+  })
+  public role: UserRole;
+
+  @ValidateIf(o => o.role === UserRole.Influencer)
+  @IsString({
+    required: true,
+    regexp: /([12][0-9]{3})-(0[1-9]|1[0-2])-([12][0-9]|0[1-9]|3[01])/,
+  })
+  public birthday: string;
+
+  @ValidateIf(o => o.role === UserRole.Influencer)
+  @IsString({
+    type: UserGender,
+  })
+  public gender: UserGender;
+
+  @ValidateIf(o => o.role === UserRole.Marketer)
+  @IsString({
+    regexp: /^[0-9]+$/i,
+    minLength: 2,
+  })
+  public phone: string;
+
+  @ValidateIf(o => o.role === UserRole.Marketer)
+  @IsString({
+    minLength: 100,
+  })
+  public description: string;
+}

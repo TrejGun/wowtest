@@ -1,10 +1,9 @@
-import * as PlainJoi from "@hapi/joi";
+import {IsString} from "../../validators";
+import {CreateAvatarFields} from "../avatars.types";
 
-// tslint:disable-next-line:variable-name
-const Joi = PlainJoi;
-
-export const createAvatarSchema = Joi.object().keys({
-  description: Joi.string()
-    .alphanum()
-    .min(10),
-});
+export class CreateAvatarSchema implements CreateAvatarFields {
+  @IsString({
+    minLength: 1,
+  })
+  public description: string;
+}

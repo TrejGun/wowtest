@@ -4,6 +4,7 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {MessagesEntity} from "./messages.entity";
 import {UserRole} from "@package/types";
 import {UsersService} from "../users/users.service";
+import {UpdateMessageFields} from "./messages.types";
 
 @Injectable()
 export class MessagesService {
@@ -21,7 +22,12 @@ export class MessagesService {
     return this.messageRepository.findOne({where: {id, senderId}, relations: ["sender", "recipient"]});
   }
 
-  public async create(senderId: number, recipientId: number, data: any, role: UserRole): Promise<MessagesEntity> {
+  public async create(
+    senderId: number,
+    recipientId: number,
+    data: UpdateMessageFields,
+    role: UserRole,
+  ): Promise<MessagesEntity> {
     if (senderId === recipientId) {
       throw new ForbiddenException("you can't send message to yourself");
     }
@@ -48,7 +54,7 @@ export class MessagesService {
       .save();
   }
 
-  public async update(senderId: number, id: number, data: any) {
+  public async update(senderId: number, id: number, data: UpdateMessageFields) {
     const message = await this.messageRepository.findOne({senderId, id});
     if (!message) {
       return;

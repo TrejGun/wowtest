@@ -2,8 +2,9 @@ import {createHash} from "crypto";
 import {Repository} from "typeorm";
 import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
-import {User, UserStatus} from "@package/types";
+import {UserStatus} from "@package/types";
 import {UsersEntity} from "./users.entity";
+import {CreateUserFields, CreateWatcherFields} from "./users.types";
 
 @Injectable()
 export class UsersService {
@@ -29,11 +30,15 @@ export class UsersService {
     });
   }
 
-  public async create(data: User, parentId: number | null): Promise<UsersEntity> {
-    data.status = UserStatus.Pending;
-    data.parentId = parentId;
+  public async create(data: CreateUserFields | CreateWatcherFields, parentId: number | null): Promise<UsersEntity> {
     data.password = this.createPasswordHash(data.password, data.email);
-    const user = await this.usersRepository.create(data).save();
+    const user = await this.usersRepository
+      .create({
+        ...data,
+        status: UserStatus.Pending,
+        parentId,
+      })
+      .save();
     delete user.password;
     return user;
   }

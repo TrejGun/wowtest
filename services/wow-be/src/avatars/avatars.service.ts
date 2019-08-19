@@ -5,6 +5,7 @@ import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {AvatarsEntity} from "./avatars.entity";
 import {File} from "../users/users.utils";
+import {CreateAvatarFields} from "./avatars.types";
 
 @Injectable()
 export class AvatarsService {
@@ -15,7 +16,7 @@ export class AvatarsService {
     private readonly avatarsRepository: Repository<AvatarsEntity>,
   ) {}
 
-  public async update(id: number, file: File, data: any): Promise<AvatarsEntity> {
+  public async update(id: number, file: File, data: CreateAvatarFields): Promise<AvatarsEntity> {
     const url = await this.uploadImage(file);
     let avatar = await this.avatarsRepository.findOne({where: {userId: id}});
     if (avatar) {

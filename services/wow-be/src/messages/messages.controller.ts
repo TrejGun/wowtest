@@ -3,8 +3,7 @@ import {AuthGuard} from "@nestjs/passport";
 import {DeleteResult} from "typeorm";
 import {MessagesService} from "./messages.service";
 import {MessagesEntity} from "./messages.entity";
-import {JoiValidationPipe} from "../pipes/joi.validation";
-import {createMessageSchema, updateMessageSchema} from "./schemas";
+import {CreateMessageSchema, UpdateMessageSchema} from "./schemas";
 import {Roles} from "../guards/roles.decorator";
 import {UserRole} from "@package/types";
 
@@ -25,7 +24,7 @@ export class MessagesController {
   public createDialog(
     @Request() req: any,
     @Param("id") id: number,
-    @Body(new JoiValidationPipe(createMessageSchema)) body: any,
+    @Body() body: CreateMessageSchema,
   ): Promise<MessagesEntity> {
     return this.messagesService.create(req.user.id, id, body, req.user.role);
   }
@@ -57,7 +56,7 @@ export class MessagesController {
   public editMessage(
     @Request() req: any,
     @Param("id") id: number,
-    @Body(new JoiValidationPipe(updateMessageSchema)) body: any,
+    @Body() body: UpdateMessageSchema,
   ): Promise<MessagesEntity | undefined> {
     return this.messagesService.update(req.user.id, id, body);
   }

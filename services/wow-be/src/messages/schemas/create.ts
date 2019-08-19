@@ -1,8 +1,9 @@
-import * as PlainJoi from "@hapi/joi";
+import {IsString} from "../../validators";
+import {UpdateMessageFields} from "../messages.types";
 
-// tslint:disable-next-line:variable-name
-const Joi = PlainJoi;
-
-export const createMessageSchema = Joi.object().keys({
-  text: Joi.string().required(),
-});
+export class CreateMessageSchema implements UpdateMessageFields {
+  @IsString({
+    minLength: 1,
+  })
+  public text: string;
+}

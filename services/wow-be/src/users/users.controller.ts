@@ -19,9 +19,8 @@ import {AvatarsService} from "../avatars/avatars.service";
 import {UsersEntity} from "./users.entity";
 import {AvatarsEntity} from "../avatars/avatars.entity";
 import {File, fileFilter} from "./users.utils";
-import {createUserSchema, createWatcherSchema} from "./schemas";
-import {createAvatarSchema} from "../avatars/schemas";
-import {JoiValidationPipe} from "../pipes/joi.validation";
+import {CreateUserSchema, CreateWatcherSchema} from "./schemas";
+import {CreateAvatarSchema} from "../avatars/schemas";
 import {Roles} from "../guards/roles.decorator";
 
 @Controller("users")
@@ -35,7 +34,7 @@ export class UsersController {
   }
 
   @Post("/")
-  public signup(@Body(new JoiValidationPipe(createUserSchema)) body: any): Promise<UsersEntity> {
+  public signup(@Body() body: CreateUserSchema): Promise<UsersEntity> {
     return this.usersService.create(body, null);
   }
 
@@ -48,10 +47,7 @@ export class UsersController {
   @Post("/watcher")
   @UseGuards(AuthGuard("jwt"))
   @Roles(UserRole.Marketer)
-  public createWatcher(
-    @Request() req: any,
-    @Body(new JoiValidationPipe(createWatcherSchema)) body: any,
-  ): Promise<UsersEntity> {
+  public createWatcher(@Request() req: any, @Body() body: CreateWatcherSchema): Promise<UsersEntity> {
     return this.usersService.create(body, req.user.id);
   }
 
@@ -72,7 +68,7 @@ export class UsersController {
   public updateAvatar(
     @Param("id") id: number,
     @UploadedFile() file: File,
-    @Body(new JoiValidationPipe(createAvatarSchema)) body: any,
+    @Body() body: CreateAvatarSchema,
   ): Promise<AvatarsEntity> {
     return this.avatarsService.update(id, file, body);
   }

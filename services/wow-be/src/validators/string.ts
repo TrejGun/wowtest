@@ -30,7 +30,7 @@ class ValidateString implements ValidatorConstraintInterface {
   private static isValid(value: any, args: ValidationArguments): string {
     const {required, minLength, maxLength, regexp, type}: StringConstraints = args.constraints[0];
 
-    if (value === void 0 || value === "") {
+    if (typeof value === "undefined" || value === "") {
       if (required) {
         return "valueMissing";
       } else {
@@ -42,11 +42,11 @@ class ValidateString implements ValidatorConstraintInterface {
       return "typeMismatch";
     }
 
-    if (minLength !== void 0 && value.length < minLength) {
+    if (typeof minLength !== "undefined" && value.length < minLength) {
       return "tooShort";
     }
 
-    if (maxLength !== void 0 && value.length > maxLength) {
+    if (typeof maxLength !== "undefined" && value.length > maxLength) {
       return "tooLong";
     }
 

@@ -28,7 +28,7 @@ class ValidatePassword implements ValidatorConstraintInterface {
   private static isValid(value: any, args: ValidationArguments): string {
     const {required = true, score = 1}: PasswordConstraints = args.constraints[0];
 
-    if (value === void 0 || value === "") {
+    if (typeof value === "undefined" || value === "") {
       if (required) {
         return "valueMissing";
       } else {

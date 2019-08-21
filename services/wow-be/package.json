@@ -59,6 +59,7 @@
     "migration:generate": "npm run typeorm migration:generate -- -n",
     "migration:revert": "npm run typeorm migration:revert",
     "migration:run": "npm run typeorm migration:run",
+    "prebuild": "rm -rf dist/",
     "start": "NODE_ENV=development tsc-watch --onSuccess \"node .\" --onFailure \"echo Compilation Failed\"",
     "start:debug": "NODE_ENV=development tsc-watch --onSuccess \"node --inspect=0.0.0.0:$DEBUG_PORT .\" --onFailure \"echo Compilation Failed\"",
     "start:prod": "NODE_ENV=production node .",

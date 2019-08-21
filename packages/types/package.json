@@ -11,16 +11,17 @@
   ],
   "license": "UNLICENSED",
   "main": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
   "module": "./src/index.ts",
   "name": "@package/types",
   "scripts": {
     "build": "tsc",
     "lint": "tslint --project tsconfig.json --fix",
-    "test": "exit 0",
-    "prepublish": "npm run build"
+    "prebuild": "rm -rf dist/",
+    "prepublish": "npm run build",
+    "test": "exit 0"
   },
   "sideEffects": false,
   "title": "-=WOW=-",
+  "types": "./dist/src/index.d.ts",
   "version": "0.0.1"
 }
